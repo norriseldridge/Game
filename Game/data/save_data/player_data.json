@@ -1,0 +1,9 @@
+{
+	"health" : 50,
+	"max_health" : 50,
+	"speed" : 75,
+	"attack" : 5,
+	"attack_range" : 50.0,
+	"x" : 50,
+	"y" : 50
+}
