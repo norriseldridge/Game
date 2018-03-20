@@ -90,7 +90,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>Z:\SDL2_ttf-2.0.14\include;Z:\SDL2_mixer-2.0.2\include;Z:\SDL2_image-2.0.2\include;Z:\SDL2-2.0.7\include;Z:\nlohmann-json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>Z:\SDL2_ttf-2.0.14\lib\x86;Z:\SDL2_mixer-2.0.2\lib\x86;Z:\SDL2_image-2.0.2\lib\x86;Z:\SDL2-2.0.7\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -1,3 +1,6 @@
 Debug/*
 Game/Debug/*
 *.vcxproj.*
+Game/x64/
+.vs/
+x64/
