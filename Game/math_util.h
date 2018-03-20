@@ -1,4 +1,5 @@
 #include "vector2.h"
+#include <cmath>
 
 #ifndef MATH_UTIL_H
 #define MATH_UTIL_H
