@@ -178,6 +178,7 @@
     <ClInclude Include="map_tile.h" />
     <ClInclude Include="math_util.h" />
     <ClInclude Include="particles.h" />
+    <ClInclude Include="path_node.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player_data.h" />
     <ClInclude Include="player_state.h" />
