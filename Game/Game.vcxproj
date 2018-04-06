@@ -147,6 +147,8 @@
     <ClCompile Include="map_tile.cpp" />
     <ClCompile Include="math_util.cpp" />
     <ClCompile Include="particles.cpp" />
+    <ClCompile Include="pathfinding.cpp" />
+    <ClCompile Include="path_node.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player_data.cpp" />
     <ClCompile Include="sprite.cpp" />
@@ -158,6 +160,7 @@
     <ClInclude Include="ai_melee.h" />
     <ClInclude Include="ai_range_data.h" />
     <ClInclude Include="ai_state.h" />
+    <ClInclude Include="astar_path_node.h" />
     <ClInclude Include="box_collider.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="circle_collider.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="map_tile.h" />
     <ClInclude Include="math_util.h" />
     <ClInclude Include="particles.h" />
+    <ClInclude Include="pathfinding.h" />
     <ClInclude Include="path_node.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player_data.h" />

@@ -8,9 +8,13 @@
 #include "ai_melee.h"
 #include "particles.h"
 #include "ui.h"
+#include "math_util.h"
+#include "pathfinding.h"
+#include <list>
 
 map::Map* current_map;
 Player* player;
+std::list<pathfinding::PathNode*> path;
 
 void core_game::setup(SDL_Renderer* renderer) {
 	
@@ -68,18 +72,14 @@ void core_game::main_loop(SDL_Renderer* renderer, const Uint8* keyboard_state, U
 
 	// render the path finding nodes
 	SDL_Rect* rect = new SDL_Rect();
-	for (pathfinding::PathNode* path_node : current_map->get_path_nodes()) {
-		if (path_node->is_valid) {
-			SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0xFF);
-		}
-		else {
-			SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
-		}
-
+	// render the path
+	path = pathfinding::get_path(current_map->get_path_nodes().front(), current_map->get_path_nodes().back());
+	for (pathfinding::PathNode* node : path) {
+		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
 		rect->w = 10;
 		rect->h = 10;
-		rect->x = path_node->x - Camera::get_instance()->get_viewport_offset().x - 5;
-		rect->y = path_node->y - Camera::get_instance()->get_viewport_offset().y - 5;
+		rect->x = node->x - Camera::get_instance()->get_viewport_offset().x - 5;
+		rect->y = node->y - Camera::get_instance()->get_viewport_offset().y - 5;
 		SDL_RenderFillRect(renderer, rect);
 	}
 	delete rect;
