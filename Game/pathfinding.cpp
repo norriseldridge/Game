@@ -54,7 +54,10 @@ namespace pathfinding {
 
 		// create a "current node" this is the node we are currently checking
 		AStarPathNode* current_node = nullptr;
-		while (!nodes_to_check.empty()) {
+		int cycles = 0;
+		while (!nodes_to_check.empty() || current_node->self == node_b) {
+			++cycles;
+
 			// sort the nodes
 			nodes_to_check.sort([](const AStarPathNode* na, const AStarPathNode* nb) { return na->globalGoal < nb->globalGoal; });
 
@@ -94,6 +97,8 @@ namespace pathfinding {
 				}
 			}
 		}
+
+		printf("finding a path took %i cycles!", cycles);
 
 		// as long as the "end" is in the visited nodes,
 		// we know we found a path
