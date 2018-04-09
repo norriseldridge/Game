@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Pre-commit started!"
+
+echo "Pre-commit ended!"
