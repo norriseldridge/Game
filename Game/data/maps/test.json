@@ -120,6 +120,118 @@
 			"tile_index" : 36,
 			"x" : 4,
 			"y" : 2
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 0,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 1,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 2,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 3,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 4,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 0,
+			"x" : 2,
+			"y" : 2
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 1,
+			"x" : 3,
+			"y" : 2
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 0,
+			"x" : 2,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 1,
+			"x" : 3,
+			"y" : 3
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 0,
+			"y" : 4
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 1,
+			"y" : 4
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 2,
+			"y" : 4
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 3,
+			"y" : 4
+		},
+		{
+			"tile_image" : "assets/images/tiles_dungeon.jpg",
+			"tile_image_colums" : 9,
+			"tile_image_rows" : 10,
+			"tile_index" : 36,
+			"x" : 4,
+			"y" : 4
 		}
 	],
 	"collisions" : [
@@ -130,22 +242,10 @@
 			"h" : 1
 		},
 		{
-			"x" : -1,
-			"y" : 0,
-			"w" : 1,
-			"h" : 3
-		},
-		{
-			"x" : 5,
-			"y" : 0,
-			"w" : 1,
-			"h" : 3
-		},
-		{
-			"x" : 0,
-			"y" : 3,
-			"w" : 5,
-			"h" : 1
+			"x" : 2,
+			"y" : 2,
+			"w" : 2,
+			"h" : 2
 		}
 	]
 }

@@ -1,6 +1,8 @@
 #include "pathfinding.h"
 #include "math_util.h"
 #include <map>
+#include <sstream>
+#include <string>
 
 namespace pathfinding {
 	// helper function to get the distance between two nodes easily
@@ -19,7 +21,7 @@ namespace pathfinding {
 		}
 	};
 
-	std::map<int, std::list<PathNode*>> path_cache;
+	std::map<std::string, std::list<PathNode*>> path_cache;
 
 	// returns the shortest path from the first node to the second node possible as quickly as possible
 	std::list<PathNode*> get_path(PathNode* node_a, PathNode* node_b) {
@@ -31,12 +33,14 @@ namespace pathfinding {
 			return std::list<PathNode*>();
 
 		// construct or path cache key
-		int path_cache_key = (int)node_a + (int)node_b;
+		std::stringstream path_cache_key;
+		path_cache_key << node_a;
+		path_cache_key << node_b;
 
 		// is this in our cache?
-		if (path_cache.find(path_cache_key) != path_cache.end()) {
+		if (path_cache.find(path_cache_key.str()) != path_cache.end()) {
 			// if it is, just return that
-			return path_cache[path_cache_key];
+			return path_cache[path_cache_key.str()];
 		}
 
 		// get our starting point to being our search
@@ -108,7 +112,7 @@ namespace pathfinding {
 		}
 
 		// cache this path
-		path_cache[path_cache_key] = path;
+		path_cache[path_cache_key.str()] = path;
 
 		// return the path we found
 		return path;

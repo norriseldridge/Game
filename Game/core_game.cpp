@@ -16,9 +16,14 @@ map::Map* current_map;
 Player* player;
 std::list<pathfinding::PathNode*> path;
 
+pathfinding::PathNode* start_path = nullptr;
+pathfinding::PathNode* end_path = nullptr;
+
 void core_game::setup(SDL_Renderer* renderer) {
 	
 	current_map = new map::Map(renderer, "data/maps/test.json");
+	start_path = current_map->get_path_nodes().front();
+	end_path = current_map->get_path_nodes().back();
 
 	PlayerData player_data = load_player_data("data/save_data/player_data.json");
 	player = new Player(renderer, player_data);
@@ -70,10 +75,18 @@ void core_game::main_loop(SDL_Renderer* renderer, const Uint8* keyboard_state, U
 	// "in game" objects
 	current_map->render();
 
-	// render the path finding nodes
-	SDL_Rect* rect = new SDL_Rect();
+	// set new "start"
+	start_path = current_map->get_path_node_at_position(player->get_position());
+
+	// set new end
+	if (keyboard_state[SDL_SCANCODE_1]) {
+		// set end
+		end_path = current_map->get_path_node_at_position(player->get_position());
+	}
+
 	// render the path
-	path = pathfinding::get_path(current_map->get_path_nodes().front(), current_map->get_path_nodes().back());
+	SDL_Rect* rect = new SDL_Rect();
+	path = pathfinding::get_path(start_path, end_path);
 	for (pathfinding::PathNode* node : path) {
 		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
 		rect->w = 10;

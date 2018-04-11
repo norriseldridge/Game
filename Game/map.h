@@ -20,6 +20,7 @@ namespace map {
 		Map(SDL_Renderer* renderer, const char* file);
 		std::vector<pathfinding::PathNode*> get_path_nodes();
 		std::vector<collision::Collider*> get_collision_tiles();
+		pathfinding::PathNode* get_path_node_at_position(Vector2 position);
 		void render();
 	};
 
