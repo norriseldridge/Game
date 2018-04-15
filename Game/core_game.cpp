@@ -9,21 +9,13 @@
 #include "particles.h"
 #include "ui.h"
 #include "math_util.h"
-#include "pathfinding.h"
 #include <list>
 
 map::Map* current_map;
 Player* player;
-std::list<pathfinding::PathNode*> path;
-
-pathfinding::PathNode* start_path = nullptr;
-pathfinding::PathNode* end_path = nullptr;
 
 void core_game::setup(SDL_Renderer* renderer) {
-	
 	current_map = new map::Map(renderer, "data/maps/test.json");
-	start_path = current_map->get_path_nodes().front();
-	end_path = current_map->get_path_nodes().back();
 
 	PlayerData player_data = load_player_data("data/save_data/player_data.json");
 	player = new Player(renderer, player_data);
@@ -35,13 +27,13 @@ void core_game::setup(SDL_Renderer* renderer) {
 		stat.attack = 10;
 		stat.health = 50;
 		stat.max_health = 50;
-		stat.speed = 15.0f;
+		stat.speed = 25.0f;
 		stat.attack_range = 45.0f;
 
 		// enemy ai
 		ai::AIRangeData range_data;
 		range_data.active_range = 200.0f;
-		range_data.inactive_range = 175.0f;
+		range_data.inactive_range = 275.0f;
 		range_data.attack_range = stat.attack_range;
 		ai::AIMelee* melee = new ai::AIMelee(range_data, 2.0f);
 
@@ -63,7 +55,7 @@ void core_game::main_loop(SDL_Renderer* renderer, const Uint8* keyboard_state, U
 	player->update(keyboard_state);
 
 	// update enemies
-	enemy::update_enemies(player->get_position());
+	enemy::update_enemies(player->get_position(), current_map);
 
 	// update particles
 	particles::update_blood_particles(renderer);
@@ -74,30 +66,6 @@ void core_game::main_loop(SDL_Renderer* renderer, const Uint8* keyboard_state, U
 	// rendering
 	// "in game" objects
 	current_map->render();
-
-	// set new "start"
-	start_path = current_map->get_path_node_at_position(player->get_position());
-
-	// set new end
-	if (keyboard_state[SDL_SCANCODE_1]) {
-		// set end
-		end_path = current_map->get_path_node_at_position(player->get_position());
-	}
-
-	// render the path
-	SDL_Rect* rect = new SDL_Rect();
-	path = pathfinding::get_path(start_path, end_path);
-	for (pathfinding::PathNode* node : path) {
-		SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF);
-		rect->w = 10;
-		rect->h = 10;
-		rect->x = node->x - Camera::get_instance()->get_viewport_offset().x - 5;
-		rect->y = node->y - Camera::get_instance()->get_viewport_offset().y - 5;
-		SDL_RenderFillRect(renderer, rect);
-	}
-	delete rect;
-	rect = nullptr;
-
 	player->render();
 	enemy::render_enemies(renderer);
 

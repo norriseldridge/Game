@@ -109,7 +109,7 @@ namespace map {
 					pathfinding::PathNode* path_node_i = path_nodes[i];
 					pathfinding::PathNode* path_node_j = path_nodes[j];
 					if (distance((double)path_node_i->x, (double)path_node_i->y,
-						(double)path_node_j->x, (double)path_node_j->y) <= TILE_SIZE * 1.5f) { // to include diagonals * 1.5f
+						(double)path_node_j->x, (double)path_node_j->y) <= TILE_SIZE) { // to include diagonals * 1.5f
 						pathfinding::add_neighbor(path_node_i, path_node_j);
 					}
 				}

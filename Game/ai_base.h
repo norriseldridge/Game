@@ -1,6 +1,7 @@
 #include "stat.h"
 #include "vector2.h"
 #include "combat_unit.h"
+#include "pathfinding.h"
 
 #ifndef AI_BASE_H
 #define AI_BASE_H
@@ -30,6 +31,7 @@ namespace ai {
 		virtual void set_position(Vector2 position)=0;
 		virtual Vector2 get_position()=0;
 		virtual void set_target(Vector2 position)=0;
+		virtual void update_path(pathfinding::PathNode* current_node, pathfinding::PathNode* target_node)=0;
 	};
 
 }

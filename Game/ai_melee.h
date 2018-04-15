@@ -21,6 +21,11 @@ namespace ai {
 		float attack_range;
 		float attack_cooldown;
 
+		// ai "state"
+		pathfinding::PathNode* target_node = nullptr;
+		pathfinding::PathNode* next_node = nullptr;
+		std::list<pathfinding::PathNode*> path_to_target;
+
 		// private melee ai functionality
 		void update_state();
 		void move_torward(Vector2 destination);
@@ -34,6 +39,7 @@ namespace ai {
 		Vector2 get_position();
 		void set_target(Vector2 position);
 		void run_ai();
+		void update_path(pathfinding::PathNode* current_node, pathfinding::PathNode* target_node);
 	};
 
 }

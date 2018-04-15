@@ -38,8 +38,12 @@ void enemy::register_enemy(Enemy* enemy) {
 	active_enemies.push_back(enemy);
 }
 
-void enemy::update_enemies(Vector2 target) {
+void enemy::update_enemies(Vector2 target, map::Map* current_map) {
+	pathfinding::PathNode* current_node = nullptr;
+	pathfinding::PathNode* target_node = current_map->get_path_node_at_position(target);
 	for (Enemy* enemy : active_enemies) {
+		current_node = current_map->get_path_node_at_position(enemy->get_position());
+		enemy->ai->update_path(current_node, target_node);
 		enemy->update(target);
 	}
 
