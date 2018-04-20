@@ -61,14 +61,9 @@ namespace ai {
 		position += movement * combat_unit->get_stat().speed * (float)game_time::get_ticks() / 1000.0f;
 	}
 
-	void AIMelee::strike_when_in_range() {
+	bool AIMelee::is_in_strike_range() {
 		float dist = (float)distance_between(position, target);
-
-		if (dist <= attack_range) {
-			if (attack_is_ready()) {
-				do_attack();
-			}
-		}
+		return dist <= attack_range;
 	}
 
 	void AIMelee::update_last_attack() {
@@ -80,8 +75,10 @@ namespace ai {
 	}
 
 	void AIMelee::do_attack() {
-		last_attack = 0.0f; // reset the attack delay
-		combat::dispatch_attack(combat_unit);
+		if (attack_is_ready()) {
+			last_attack = 0.0f; // reset the attack delay
+			combat::dispatch_attack(combat_unit);
+		}
 	}
 
 	void AIMelee::run_ai() {
@@ -89,26 +86,20 @@ namespace ai {
 		update_last_attack();
 
 		if (state == AIState::active_state) {
-			if (path_to_target.size() > 1) {
-				next_node = path_to_target.back();
-				if (distance(next_node->x, next_node->y, position.x, position.y) < 45) {
-					path_to_target.pop_back();
-				}
-				
-				move_torward(Vector2(next_node->x, next_node->y));
+			update_path(position, target);
+			
+			pathfinding::PathNode* next_node = get_next_node();
+			if (next_node != nullptr) {
+				target = get_next_node()->position;
 			}
-			else {
-				move_torward(target);
-			}
+
+			move_torward(target);
 		}
 
-		strike_when_in_range();
-	}
-
-	void AIMelee::update_path(pathfinding::PathNode* current_node, pathfinding::PathNode* target_node) {
-		if (this->target_node != target_node) {
-			this->target_node = target_node;
-			path_to_target = pathfinding::get_path(current_node, target_node);
+		if (state == AIState::attack_state) {
+			if (is_in_strike_range()) {
+				do_attack();
+			}
 		}
 	}
 }

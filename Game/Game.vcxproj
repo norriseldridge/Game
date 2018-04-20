@@ -147,6 +147,7 @@
     <ClCompile Include="map_tile.cpp" />
     <ClCompile Include="math_util.cpp" />
     <ClCompile Include="particles.cpp" />
+    <ClCompile Include="pathfinder.cpp" />
     <ClCompile Include="pathfinding.cpp" />
     <ClCompile Include="path_node.cpp" />
     <ClCompile Include="player.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="map_tile.h" />
     <ClInclude Include="math_util.h" />
     <ClInclude Include="particles.h" />
+    <ClInclude Include="pathfinder.h" />
     <ClInclude Include="pathfinding.h" />
     <ClInclude Include="path_node.h" />
     <ClInclude Include="player.h" />

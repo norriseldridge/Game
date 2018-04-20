@@ -2,13 +2,14 @@
 #include "ai_range_data.h"
 #include "ai_state.h"
 #include <cstdio>
+#include "pathfinder.h"
 
 #ifndef AI_MELEE_H
 #define AI_MELEE_H
 
 namespace ai {
 
-	class AIMelee : public AI {
+	class AIMelee : public AI, public pathfinding::Pathfinder {
 	private:
 		AIState state;
 		Vector2 position;
@@ -21,15 +22,10 @@ namespace ai {
 		float attack_range;
 		float attack_cooldown;
 
-		// ai "state"
-		pathfinding::PathNode* target_node = nullptr;
-		pathfinding::PathNode* next_node = nullptr;
-		std::list<pathfinding::PathNode*> path_to_target;
-
 		// private melee ai functionality
 		void update_state();
 		void move_torward(Vector2 destination);
-		void strike_when_in_range();
+		bool is_in_strike_range();
 		void update_last_attack();
 		bool attack_is_ready();
 		void do_attack();
@@ -39,7 +35,6 @@ namespace ai {
 		Vector2 get_position();
 		void set_target(Vector2 position);
 		void run_ai();
-		void update_path(pathfinding::PathNode* current_node, pathfinding::PathNode* target_node);
 	};
 
 }

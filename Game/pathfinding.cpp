@@ -5,9 +5,39 @@
 #include <string>
 
 namespace pathfinding {
+
+	std::vector<pathfinding::PathNode*> path_nodes;
+
+	void register_path_node(pathfinding::PathNode* path_node) {
+		path_nodes.push_back(path_node);
+	}
+
+	int get_path_nodes_size() {
+		return path_nodes.size();
+	}
+
+	PathNode* get_path_node_at_index(int index) {
+		return path_nodes[index];
+	}
+
+	PathNode* get_path_node_at_position(Vector2 position) {
+		pathfinding::PathNode* nearest = nullptr;
+		float nearest_dist = 0.0f;
+
+		for (pathfinding::PathNode* node : path_nodes) {
+			float temp_dist = distance_between(position, node->position);
+			if (nearest == nullptr || temp_dist < nearest_dist) {
+				nearest = node;
+				nearest_dist = temp_dist;
+			}
+		}
+
+		return nearest;
+	}
+
 	// helper function to get the distance between two nodes easily
 	double distance_between_nodes(PathNode* node_a, PathNode* node_b) {
-		return distance((double)node_a->x, (double)node_a->y, (double)node_b->x, (double)node_b->y);
+		return distance_between(node_a->position, node_b->position);
 	}
 
 	struct PathCacheKey

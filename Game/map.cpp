@@ -33,8 +33,8 @@ namespace map {
 
 				// offseting to be centered because
 				// colliders are centered
-				x += r / 2;
-				y += r / 2;
+				x += (int)(r / 2);
+				y += (int)(r / 2);
 
 				this->collision_tiles.push_back(collision::create_collision_circle(Vector2(x * TILE_SIZE, y * TILE_SIZE), (float)(r * TILE_SIZE)));
 			}
@@ -52,8 +52,8 @@ namespace map {
 					off_y = -0.5f;
 				}
 
-				x += w / 2.0f;
-				y += h / 2.0f;
+				x += (int)(w / 2.0f);
+				y += (int)(h / 2.0f);
 
 				collision::BoxCollider* coll = collision::create_collision_box(Vector2(((float)x + off_x) * TILE_SIZE, ((float)y + off_y) * TILE_SIZE), Vector2(w * TILE_SIZE, h * TILE_SIZE));
 
@@ -89,10 +89,10 @@ namespace map {
 			// add path node to the path nodes
 			if (is_valid) {
 				pathfinding::PathNode * path_node = new pathfinding::PathNode();
-				path_node->x = x * TILE_SIZE;
-				path_node->y = y * TILE_SIZE;
+				path_node->position.x = (float)(x * TILE_SIZE);
+				path_node->position.y = (float)(y * TILE_SIZE);
 				path_node->is_valid = true;
-				this->path_nodes.push_back(path_node);
+				pathfinding::register_path_node(path_node);
 			}
 
 			// add map tile to the map tiles
@@ -102,14 +102,13 @@ namespace map {
 		}
 
 		// look at each path node and determine its neighbors
-		int path_nodes_count = path_nodes.size();
+		int path_nodes_count = pathfinding::get_path_nodes_size();
 		for (int i = 0; i < path_nodes_count; ++i) {
 			for (int j = 0; j < path_nodes_count; ++j) {
 				if (i != j) {
-					pathfinding::PathNode* path_node_i = path_nodes[i];
-					pathfinding::PathNode* path_node_j = path_nodes[j];
-					if (distance((double)path_node_i->x, (double)path_node_i->y,
-						(double)path_node_j->x, (double)path_node_j->y) <= TILE_SIZE) { // to include diagonals * 1.5f
+					pathfinding::PathNode* path_node_i = pathfinding::get_path_node_at_index(i);
+					pathfinding::PathNode* path_node_j = pathfinding::get_path_node_at_index(j);
+					if (distance_between(path_node_i->position, path_node_j->position) <= TILE_SIZE) { // to include diagonals * 1.5f
 						pathfinding::add_neighbor(path_node_i, path_node_j);
 					}
 				}
@@ -117,27 +116,8 @@ namespace map {
 		}
 	}
 
-	std::vector<pathfinding::PathNode*> Map::get_path_nodes() {
-		return path_nodes;
-	}
-
 	std::vector<collision::Collider*> Map::get_collision_tiles() {
 		return collision_tiles;
-	}
-
-	pathfinding::PathNode* Map::get_path_node_at_position(Vector2 position) {
-		pathfinding::PathNode* nearest = nullptr;
-		float nearest_dist = 0.0f;
-
-		for (pathfinding::PathNode* node : path_nodes) {
-			float temp_dist = distance(position.x, position.y, node->x, node->y);
-			if (nearest == nullptr || temp_dist < nearest_dist) {
-				nearest = node;
-				nearest_dist = temp_dist;
-			}
-		}
-
-		return nearest;
 	}
 
 	void Map::render() {
